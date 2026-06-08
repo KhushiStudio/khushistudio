@@ -1,0 +1,1680 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Khushi Studio And Color Lab | Best Photography in Ballia</title>
+    <style>
+        /* --- DEEPSTUDIO INSPIRED DESIGN --- */
+        :root {
+            --primary: #ff9800;
+            --secondary: #f5a623;
+            --dark: #0a0a0a;
+            --dark2: #141414;
+            --light: #fff;
+            --gray: #888;
+            --text: #eee;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--dark);
+            color: var(--text);
+            overflow-x: hidden;
+        }
+
+        /* --- NAVIGATION --- */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(10, 10, 10, 0.9);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .logo {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--light);
+            letter-spacing: 3px;
+        }
+
+        .logo span {
+            color: var(--primary);
+        }
+
+        .nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav a {
+            color: var(--text);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .nav a:hover {
+            color: var(--primary);
+        }
+
+        .book-btn {
+            padding: 10px 25px;
+            background: var(--primary);
+            color: var(--dark) !important;
+            border-radius: 30px;
+            font-weight: 600;
+        }
+
+        .book-btn:hover {
+            background: var(--secondary);
+        }
+
+        /* --- HERO SLIDER --- */
+        .hero-slider {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1s ease;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .slide.active {
+            opacity: 1;
+        }
+
+        .slide::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(0deg, var(--dark) 0%, transparent 50%, rgba(0,0,0,0.5) 100%);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 800px;
+        }
+
+        .hero-content h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            animation: slideUp 1s ease;
+        }
+
+        .hero-content h1 span {
+            color: var(--primary);
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            opacity: 0.8;
+            animation: slideUp 1s ease 0.2s both;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero-btns {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            animation: slideUp 1s ease 0.4s both;
+        }
+
+        .btn {
+            padding: 14px 35px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: var(--dark);
+        }
+
+        .btn-primary:hover {
+            background: var(--secondary);
+            transform: translateY(-3px);
+        }
+
+        .btn-outline {
+            border: 2px solid var(--light);
+            color: var(--light);
+        }
+
+        .btn-outline:hover {
+            background: var(--light);
+            color: var(--dark);
+        }
+
+        /* --- SLIDER CONTROLS --- */
+        .slider-dots {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            z-index: 10;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.3);
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .dot.active {
+            background: var(--primary);
+            transform: scale(1.2);
+        }
+
+        /* --- ABOUT SECTION --- */
+        .about {
+            padding: 100px 10%;
+            background: var(--dark2);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .about-img {
+            border-radius: 20px;
+            overflow: hidden;
+            height: 500px;
+        }
+
+        .about-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .about-text h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .about-text h2 span {
+            color: var(--primary);
+        }
+
+        .about-text p {
+            opacity: 0.7;
+            line-height: 1.8;
+            margin-bottom: 30px;
+        }
+
+        .about-features {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .feature {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .feature-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--primary);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        /* --- SERVICES SECTION --- */
+        .services {
+            padding: 100px 10%;
+            background: var(--dark);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+        }
+
+        .section-header .line {
+            width: 60px;
+            height: 4px;
+            background: var(--primary);
+            margin: 0 auto;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            background: var(--dark2);
+            padding: 40px 30px;
+            border-radius: 15px;
+            transition: 0.4s;
+            border: 1px solid transparent;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary);
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .service-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+
+        .service-card p {
+            opacity: 0.7;
+            line-height: 1.7;
+        }
+
+        /* --- PORTFOLIO --- */
+        .portfolio {
+            padding: 100px 5%;
+            background: var(--dark2);
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+
+        .portfolio-item {
+            position: relative;
+            height: 300px;
+            overflow: hidden;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        .portfolio-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: 0.5s;
+        }
+
+        .portfolio-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .portfolio-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            opacity: 0;
+            transition: 0.3s;
+        }
+
+        .portfolio-item:hover .portfolio-overlay {
+            opacity: 1;
+        }
+
+        /* --- BOOKING SECTION --- */
+        .booking {
+            padding: 100px 10%;
+            background: linear-gradient(135deg, var(--dark) 0%, var(--dark2) 100%);
+        }
+
+        .booking-box {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(20,20,20,0.8);
+            padding: 50px;
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 500;
+            color: var(--primary);
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 15px;
+            background: var(--dark);
+            border: 1px solid #333;
+            border-radius: 10px;
+            color: var(--text);
+            font-size: 1rem;
+            transition: border-color 0.3s, box-shadow 0.3s, transform 0.2s;
+            appearance: none;
+            -webkit-appearance: none;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(255,152,0,0.15);
+        }
+
+        /* Input filled state */
+        .form-group input.filled,
+        .form-group select.filled,
+        .form-group textarea.filled {
+            border-color: #4CAF50;
+            box-shadow: 0 0 0 3px rgba(76,175,80,0.12);
+        }
+
+        /* Select wrapper for custom arrow */
+        .select-wrap {
+            position: relative;
+        }
+        .select-wrap::after {
+            content: '▾';
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--primary);
+            pointer-events: none;
+            font-size: 1.1rem;
+            transition: transform 0.3s;
+        }
+        .select-wrap.open::after {
+            transform: translateY(-50%) rotate(180deg);
+        }
+
+        /* Service preview badge shown after selection */
+        .service-badge {
+            display: none;
+            margin-top: 10px;
+            padding: 10px 16px;
+            border-radius: 8px;
+            font-size: 0.88rem;
+            font-weight: 600;
+            animation: badgePop 0.4s cubic-bezier(0.175,0.885,0.32,1.275);
+            align-items: center;
+            gap: 8px;
+        }
+        .service-badge.show {
+            display: flex;
+        }
+        @keyframes badgePop {
+            0%   { opacity:0; transform: scale(0.7) translateY(8px); }
+            70%  { transform: scale(1.06) translateY(-2px); }
+            100% { opacity:1; transform: scale(1) translateY(0); }
+        }
+
+        /* Input ripple effect container */
+        .form-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        /* Floating label animation */
+        .form-group label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 500;
+            color: var(--primary);
+            transition: color 0.3s;
+        }
+
+        /* Checkmark appear on filled input */
+        .input-check {
+            position: absolute;
+            right: 15px;
+            top: 50px;
+            font-size: 1.1rem;
+            opacity: 0;
+            transition: opacity 0.3s, transform 0.3s;
+            transform: scale(0);
+            pointer-events: none;
+            color: #4CAF50;
+        }
+        .input-check.show {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* Shake animation for empty required fields */
+        @keyframes shake {
+            0%,100% { transform: translateX(0); }
+            20%,60% { transform: translateX(-6px); }
+            40%,80% { transform: translateX(6px); }
+        }
+        .shake {
+            animation: shake 0.4s ease;
+            border-color: #e74c3c !important;
+            box-shadow: 0 0 0 3px rgba(231,76,60,0.2) !important;
+        }
+
+        /* Option highlight popup toast */
+        .option-toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(80px);
+            background: linear-gradient(135deg, #1a1a1a, #222);
+            border: 1px solid rgba(255,152,0,0.4);
+            border-left: 4px solid var(--primary);
+            padding: 14px 24px;
+            border-radius: 12px;
+            font-size: 0.92rem;
+            color: #fff;
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+            transition: transform 0.4s cubic-bezier(0.175,0.885,0.32,1.275), opacity 0.4s;
+            opacity: 0;
+            min-width: 280px;
+            justify-content: center;
+        }
+        .option-toast.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 18px;
+            background: var(--primary);
+            color: var(--dark);
+            font-weight: 700;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .submit-btn:hover {
+            background: var(--secondary);
+        }
+
+        /* --- THANK YOU MESSAGE --- */
+        .thank-you {
+            display: none;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .thank-you.active {
+            display: block;
+            animation: slideUp 0.6s ease;
+        }
+
+        /* Animated checkmark circle */
+        .ty-check-wrap {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ff9800, #f5a623);
+            margin: 0 auto 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            animation: popIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 0 40px rgba(255,152,0,0.4);
+        }
+
+        @keyframes popIn {
+            0% { transform: scale(0); opacity: 0; }
+            70% { transform: scale(1.15); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .thank-you h2 {
+            color: var(--primary);
+            font-size: 2rem;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+
+        .thank-you .ty-sub {
+            font-size: 1rem;
+            opacity: 0.7;
+            margin-bottom: 25px;
+        }
+
+        /* Main Notice Box */
+        .ty-notice-box {
+            background: linear-gradient(135deg, rgba(255,152,0,0.12), rgba(245,166,35,0.06));
+            border: 1px solid rgba(255,152,0,0.35);
+            border-left: 4px solid var(--primary);
+            border-radius: 14px;
+            padding: 25px 30px;
+            margin: 20px 0 25px;
+            text-align: left;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ty-notice-box::before {
+            content: '';
+            position: absolute;
+            top: -40px; right: -40px;
+            width: 120px; height: 120px;
+            background: rgba(255,152,0,0.07);
+            border-radius: 50%;
+        }
+
+        .ty-notice-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .ty-notice-box p {
+            opacity: 0.85;
+            line-height: 1.9;
+            font-size: 0.95rem;
+            margin: 0;
+        }
+
+        /* Info cards row */
+        .ty-info-row {
+            display: flex;
+            gap: 12px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .ty-info-card {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 10px;
+            padding: 12px 18px;
+            font-size: 0.88rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text);
+            opacity: 0.9;
+        }
+
+        .ty-info-card span {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        /* Stay tuned banner */
+        .ty-stay-tuned {
+            background: linear-gradient(135deg, #1a1a1a, #222);
+            border: 1px solid rgba(255,152,0,0.25);
+            border-radius: 12px;
+            padding: 18px 25px;
+            margin: 18px 0;
+            font-size: 1rem;
+            letter-spacing: 0.5px;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .ty-stay-tuned .pulse-dot {
+            width: 10px;
+            height: 10px;
+            background: #4CAF50;
+            border-radius: 50%;
+            display: inline-block;
+            animation: pulse 1.4s infinite;
+            flex-shrink: 0;
+        }
+
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(76,175,80,0.5); }
+            50% { box-shadow: 0 0 0 8px rgba(76,175,80,0); }
+        }
+
+        .whatsapp-note {
+            background: linear-gradient(135deg, #1db954, #25D366);
+            color: white;
+            padding: 14px 25px;
+            border-radius: 50px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 10px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            text-decoration: none;
+            transition: 0.3s;
+            box-shadow: 0 4px 20px rgba(37,211,102,0.3);
+        }
+
+        .whatsapp-note:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(37,211,102,0.45);
+        }
+
+        .again-btn {
+            margin-top: 20px;
+            padding: 13px 35px;
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: 0.3s;
+            letter-spacing: 0.5px;
+        }
+
+        .again-btn:hover {
+            background: var(--primary);
+            color: var(--dark);
+            transform: translateY(-2px);
+        }
+
+        /* --- CONTACT --- */
+        .contact {
+            padding: 80px 10%;
+            background: var(--dark2);
+        }
+
+        .contact-grid {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 50px;
+        }
+
+        .contact-item {
+            text-align: center;
+        }
+
+        .contact-item .icon {
+            width: 60px;
+            height: 60px;
+            background: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin: 0 auto 15px;
+        }
+
+        .contact-item h4 {
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+
+        .contact-item a {
+            color: var(--text);
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .contact-item a:hover {
+            color: var(--primary);
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            padding: 30px;
+            background: var(--dark);
+            text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        footer p {
+            opacity: 0.5;
+            font-size: 0.9rem;
+        }
+
+        /* ══════════════════════════════════════════
+           FULL-SCREEN THANK YOU OVERLAY
+        ══════════════════════════════════════════ */
+        #tyOverlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 99999;
+            background: #0a0a0a;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        #tyOverlay.show {
+            display: flex;
+            animation: overlayFadeIn 0.5s ease forwards;
+        }
+        @keyframes overlayFadeIn {
+            from { opacity: 0; }
+            to   { opacity: 1; }
+        }
+
+        /* Radial glow bg */
+        .ty-overlay-glow {
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse 60% 50% at 50% 40%, rgba(255,152,0,0.18) 0%, transparent 70%),
+                radial-gradient(ellipse 80% 60% at 50% 100%, rgba(245,166,35,0.10) 0%, transparent 60%);
+            pointer-events: none;
+        }
+
+        /* Floating particles */
+        .ty-particles {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        .ty-particle {
+            position: absolute;
+            bottom: -20px;
+            border-radius: 50%;
+            opacity: 0;
+            animation: floatUp linear infinite;
+        }
+        @keyframes floatUp {
+            0%   { transform: translateY(0) scale(1);   opacity: 0; }
+            10%  { opacity: 0.7; }
+            90%  { opacity: 0.3; }
+            100% { transform: translateY(-110vh) scale(0.4); opacity: 0; }
+        }
+
+        /* Sparkle stars */
+        .ty-sparkle {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--primary);
+            pointer-events: none;
+            animation: sparkleFade ease-in-out infinite;
+        }
+        @keyframes sparkleFade {
+            0%, 100% { transform: scale(0) rotate(0deg);   opacity: 0; }
+            50%       { transform: scale(1) rotate(180deg); opacity: 1; }
+        }
+
+        /* Content wrapper */
+        .ty-overlay-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 700px;
+            padding: 40px 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0;
+        }
+
+        /* Camera shutter icon */
+        .ty-camera-icon {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ff9800, #f5a623);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3.2rem;
+            margin-bottom: 32px;
+            box-shadow:
+                0 0 0 0 rgba(255,152,0,0.5),
+                0 10px 50px rgba(255,152,0,0.45);
+            animation: cameraPopIn 0.7s cubic-bezier(0.175,0.885,0.32,1.275) forwards,
+                       cameraRing 2s ease 1s infinite;
+            opacity: 0;
+        }
+        @keyframes cameraPopIn {
+            0%   { transform: scale(0) rotate(-30deg); opacity: 0; }
+            70%  { transform: scale(1.15) rotate(5deg); opacity: 1; }
+            100% { transform: scale(1) rotate(0deg);   opacity: 1; }
+        }
+        @keyframes cameraRing {
+            0%   { box-shadow: 0 0 0 0 rgba(255,152,0,0.5), 0 10px 50px rgba(255,152,0,0.45); }
+            70%  { box-shadow: 0 0 0 18px rgba(255,152,0,0), 0 10px 50px rgba(255,152,0,0.45); }
+            100% { box-shadow: 0 0 0 0 rgba(255,152,0,0), 0 10px 50px rgba(255,152,0,0.45); }
+        }
+
+        /* "Thank You" heading */
+        .ty-headline {
+            font-size: clamp(2rem, 6vw, 3.6rem);
+            font-weight: 800;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 14px;
+            overflow: hidden;
+        }
+        .ty-headline .word {
+            display: inline-block;
+            opacity: 0;
+            transform: translateY(60px);
+        }
+        .ty-headline .word.animate {
+            animation: wordRise 0.6s cubic-bezier(0.23,1,0.32,1) forwards;
+        }
+        .ty-headline .highlight { color: var(--primary); }
+        @keyframes wordRise {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* "For Joining Us!" sub-line */
+        .ty-subline {
+            font-size: clamp(1.1rem, 3vw, 1.55rem);
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.75);
+            opacity: 0;
+            animation: fadeSlideIn 0.7s ease 1.2s forwards;
+            margin-bottom: 36px;
+        }
+        @keyframes fadeSlideIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Divider line */
+        .ty-divider {
+            width: 0;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--primary), transparent);
+            border-radius: 4px;
+            margin-bottom: 32px;
+            animation: expandLine 0.8s ease 1.5s forwards;
+        }
+        @keyframes expandLine {
+            to { width: 260px; }
+        }
+
+        /* "Stay Tuned!" badge */
+        .ty-stay-badge {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            background: rgba(255,152,0,0.10);
+            border: 1px solid rgba(255,152,0,0.4);
+            border-radius: 60px;
+            padding: 14px 32px;
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--primary);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            opacity: 0;
+            animation: badgePop2 0.7s cubic-bezier(0.175,0.885,0.32,1.275) 1.9s forwards;
+            margin-bottom: 36px;
+        }
+        @keyframes badgePop2 {
+            0%   { opacity: 0; transform: scale(0.6); }
+            70%  { transform: scale(1.06); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+        .ty-stay-badge .live-dot {
+            width: 12px;
+            height: 12px;
+            background: #4CAF50;
+            border-radius: 50%;
+            flex-shrink: 0;
+            animation: pulse 1.4s infinite;
+        }
+
+        /* Close / back button */
+        .ty-close-btn {
+            opacity: 0;
+            animation: fadeSlideIn 0.6s ease 2.4s forwards;
+            background: transparent;
+            border: 2px solid rgba(255,255,255,0.2);
+            color: rgba(255,255,255,0.6);
+            padding: 12px 36px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+        }
+        .ty-close-btn:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        /* Bottom branding strip */
+        .ty-brand-strip {
+            position: absolute;
+            bottom: 28px;
+            left: 0; right: 0;
+            text-align: center;
+            font-size: 0.8rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.2);
+            opacity: 0;
+            animation: fadeSlideIn 0.6s ease 2.6s forwards;
+        }
+        .ty-brand-strip span { color: rgba(255,152,0,0.5); }
+
+        /* Shutter curtain effect on open */
+        .ty-shutter {
+            position: absolute;
+            inset: 0;
+            background: #0a0a0a;
+            transform-origin: top;
+            animation: shutterOpen 0.55s cubic-bezier(0.77,0,0.175,1) 0.05s forwards;
+            pointer-events: none;
+            z-index: 3;
+        }
+        @keyframes shutterOpen {
+            from { transform: scaleY(1); }
+            to   { transform: scaleY(0); }
+        }
+
+        /* ── MOBILE ── */
+        /* --- MOBILE --- */
+        @media (max-width: 768px) {
+            .nav { padding: 15px 20px; }
+            .nav ul { display: none; }
+            .hero-content h1 { font-size: 2rem; }
+            .hero-btns { flex-direction: column; }
+            .about { grid-template-columns: 1fr; }
+            .about-img { height: 300px; }
+            .form-grid { grid-template-columns: 1fr; }
+            .booking-box { padding: 30px 20px; }
+            .portfolio-grid { grid-template-columns: 1fr 1fr; }
+        }
+    </style>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+    <script>
+        // Slider Images
+        const slides = [
+            'https://images.unsplash.com/photo-1516035069371-29a1b244cc32?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80',
+            'https://images.unsplash.com/photo-1519741497674-611481863552?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80',
+            'https://images.unsplash.com/photo-1520854221256-17451cc330e7?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80'
+        ];
+
+        let currentSlide = 0;
+
+        function changeSlide(n) {
+            const slideElements = document.querySelectorAll('.slide');
+            const dots = document.querySelectorAll('.dot');
+            
+            slideElements[currentSlide].classList.remove('active');
+            dots[currentSlide].classList.remove('active');
+            
+            currentSlide = (n + slideElements.length) % slideElements.length;
+            
+            slideElements[currentSlide].classList.add('active');
+            dots[currentSlide].classList.add('active');
+        }
+
+        function autoSlide() {
+            changeSlide(currentSlide + 1);
+        }
+
+        setInterval(autoSlide, 4000);
+
+        // Booking Form
+        function sendBooking() {
+            var name = document.getElementById('name').value;
+            var mobile = document.getElementById('mobile').value;
+            var date = document.getElementById('date').value;
+            var service = document.getElementById('service').value;
+            var message = document.getElementById('message').value;
+
+            if(name == "" || mobile == "" || date == "" || service == "") {
+                if(!name)    shakeField('name');
+                if(!mobile)  shakeField('mobile');
+                if(!date)    shakeField('date');
+                if(!service) shakeField('service');
+                showToast("⚠️  Please fill all required fields!");
+                return false;
+            }
+
+            var emailBody = "Hello Khushi Studio,%0A%0ANew Booking Request:%0A%0A" +
+                "📛 Name: " + name + "%0A" +
+                "📱 Mobile: " + mobile + "%0A" +
+                "📅 Event Date: " + date + "%0A" +
+                "📸 Service: " + service + "%0A" +
+                "💬 Message: " + message + "%0A%0AThank you!";
+
+            window.location.href = "mailto:khushistudiobltr@gmail.com?subject=Booking - " + name + "&body=" + emailBody;
+            
+            showThankYou(name, mobile);        }
+
+        function showThankYou(name, mobile) {
+            document.getElementById('bookingForm').style.display = 'none';
+            var ty = document.getElementById('thankYou');
+            ty.classList.add('active');
+            document.getElementById('ty-name').textContent = name;
+            document.getElementById('ty-mobile').textContent = mobile;
+            // Show the cinematic overlay
+            openTyOverlay();
+        }
+
+        /* ── OVERLAY FUNCTIONS ───────────────────────────────── */
+        function openTyOverlay() {
+            var ov = document.getElementById('tyOverlay');
+            ov.style.display = 'flex';
+            // reset shutter
+            var sh = document.getElementById('tyShutter');
+            sh.style.animation = 'none';
+            void sh.offsetWidth;
+            sh.style.animation = 'shutterOpen 0.55s cubic-bezier(0.77,0,0.175,1) 0.05s forwards';
+
+            // animate headline words with stagger
+            var words = ov.querySelectorAll('.ty-headline .word');
+            words.forEach(function(w, i) {
+                w.style.opacity = '0';
+                w.style.transform = 'translateY(60px)';
+                w.style.animation = 'none';
+                void w.offsetWidth;
+                w.style.animation = 'wordRise 0.6s cubic-bezier(0.23,1,0.32,1) ' + (0.45 + i * 0.14) + 's forwards';
+            });
+
+            // Reset camera icon animation
+            var cam = document.getElementById('tyCamIcon');
+            cam.style.animation = 'none';
+            void cam.offsetWidth;
+            cam.style.animation = 'cameraPopIn 0.7s cubic-bezier(0.175,0.885,0.32,1.275) 0.2s forwards, cameraRing 2s ease 1s infinite';
+            cam.style.opacity = '0';
+
+            buildParticles();
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeTyOverlay() {
+            var ov = document.getElementById('tyOverlay');
+            ov.style.animation = 'none';
+            ov.style.opacity = '0';
+            ov.style.transition = 'opacity 0.4s ease';
+            setTimeout(function() {
+                ov.style.display = 'none';
+                ov.style.opacity = '';
+                ov.style.transition = '';
+                ov.style.animation = '';
+                document.body.style.overflow = '';
+                clearParticles();
+            }, 420);
+        }
+
+        function buildParticles() {
+            var container = document.getElementById('tyParticles');
+            container.innerHTML = '';
+            var colors = ['#ff9800','#f5a623','#fff','#ffcc80','#ffe0b2','#4CAF50'];
+            for (var i = 0; i < 38; i++) {
+                var p = document.createElement('div');
+                p.className = 'ty-particle';
+                var size = Math.random() * 10 + 4;
+                p.style.cssText = [
+                    'width:'  + size + 'px',
+                    'height:' + size + 'px',
+                    'left:'   + (Math.random() * 100) + '%',
+                    'background:' + colors[Math.floor(Math.random() * colors.length)],
+                    'animation-duration:' + (Math.random() * 9 + 6) + 's',
+                    'animation-delay:'    + (Math.random() * 5) + 's',
+                    'opacity:0'
+                ].join(';');
+                container.appendChild(p);
+            }
+            // sparkle stars
+            for (var j = 0; j < 18; j++) {
+                var s = document.createElement('div');
+                s.className = 'ty-sparkle';
+                var ssize = Math.random() * 6 + 3;
+                s.style.cssText = [
+                    'width:'  + ssize + 'px',
+                    'height:' + ssize + 'px',
+                    'top:'    + (Math.random() * 90 + 5)  + '%',
+                    'left:'   + (Math.random() * 90 + 5)  + '%',
+                    'animation-duration:' + (Math.random() * 3 + 1.5) + 's',
+                    'animation-delay:'    + (Math.random() * 4) + 's'
+                ].join(';');
+                container.appendChild(s);
+            }
+        }
+
+        function clearParticles() {
+            document.getElementById('tyParticles').innerHTML = '';
+        }
+        /* ── END OVERLAY ─────────────────────────────────────── */
+
+        function bookAgain() {
+            document.getElementById('bookingForm').style.display = 'block';
+            document.getElementById('thankYou').classList.remove('active');
+            document.getElementById('name').value = '';
+            document.getElementById('mobile').value = '';
+            document.getElementById('date').value = '';
+            document.getElementById('service').value = '';
+            document.getElementById('message').value = '';
+        }
+
+        // ── OPTION / INPUT ANIMATIONS ──────────────────────────
+
+        var toastTimer = null;
+
+        // Service color map
+        var serviceColors = {
+            'Wedding Photography': { bg:'rgba(255,100,130,0.15)', border:'#ff6482', text:'#ff6482' },
+            'Pre-Wedding Shoot':   { bg:'rgba(255,80,180,0.15)',  border:'#ff50b4', text:'#ff50b4' },
+            'Birthday Event':      { bg:'rgba(255,200,0,0.15)',   border:'#ffc800', text:'#ffc800' },
+            'Portrait Session':    { bg:'rgba(100,180,255,0.15)', border:'#64b4ff', text:'#64b4ff' },
+            'Color Lab / Printing':{ bg:'rgba(100,220,150,0.15)', border:'#64dc96', text:'#64dc96' },
+            'School/College Event':{ bg:'rgba(180,100,255,0.15)', border:'#b464ff', text:'#b464ff' },
+            'Videography':         { bg:'rgba(255,140,0,0.15)',   border:'#ff8c00', text:'#ff8c00' }
+        };
+
+        function onServiceSelect(sel) {
+            var val   = sel.value;
+            var wrap  = document.getElementById('serviceWrap');
+            var badge = document.getElementById('serviceBadge');
+
+            // open/close arrow animation
+            wrap.classList.add('open');
+            setTimeout(function(){ wrap.classList.remove('open'); }, 400);
+
+            if (!val) {
+                badge.classList.remove('show');
+                sel.classList.remove('filled');
+                return;
+            }
+
+            // get icon & desc from selected option
+            var opt   = sel.options[sel.selectedIndex];
+            var icon  = opt.getAttribute('data-icon') || '📸';
+            var desc  = opt.getAttribute('data-desc') || val;
+            var clr   = serviceColors[val] || { bg:'rgba(255,152,0,0.15)', border:'#ff9800', text:'#ff9800' };
+
+            // animate badge
+            badge.classList.remove('show');
+            void badge.offsetWidth; // reflow to restart animation
+            badge.style.background   = clr.bg;
+            badge.style.border       = '1px solid ' + clr.border;
+            badge.style.color        = clr.text;
+            badge.innerHTML          = icon + ' <span>' + desc + '</span>';
+            badge.classList.add('show');
+
+            sel.classList.add('filled');
+
+            // show floating toast
+            showToast(icon + '  <strong>' + val + '</strong> — Selected!');
+        }
+
+        function onInput(el) {
+            var checkId = 'check-' + el.id;
+            var check   = document.getElementById(checkId);
+            el.classList.remove('shake');
+            if (el.value.trim().length > 0) {
+                el.classList.add('filled');
+                if (check) {
+                    check.classList.add('show');
+                    // small bounce on checkmark
+                    check.style.transform = 'scale(1.4)';
+                    setTimeout(function(){ check.style.transform = 'scale(1)'; }, 200);
+                }
+            } else {
+                el.classList.remove('filled');
+                if (check) check.classList.remove('show');
+            }
+        }
+
+        function showToast(msg) {
+            var t = document.getElementById('optionToast');
+            if (!t) {
+                t = document.createElement('div');
+                t.id = 'optionToast';
+                t.className = 'option-toast';
+                document.body.appendChild(t);
+            }
+            t.innerHTML = msg;
+            t.classList.remove('show');
+            void t.offsetWidth;
+            t.classList.add('show');
+            if (toastTimer) clearTimeout(toastTimer);
+            toastTimer = setTimeout(function(){ t.classList.remove('show'); }, 2800);
+        }
+
+        function shakeField(id) {
+            var el = document.getElementById(id);
+            if (!el) return;
+            el.classList.remove('shake');
+            void el.offsetWidth;
+            el.classList.add('shake');
+            setTimeout(function(){ el.classList.remove('shake'); }, 500);
+        }
+
+        // ── END OPTION ANIMATIONS ───────────────────────────────────────────
+
+        window.addEventListener('load', function() {
+            var slideElements = document.querySelectorAll('.slide');
+            if(slideElements.length > 0) {
+                slideElements[0].classList.add('active');
+                document.querySelectorAll('.dot')[0].classList.add('active');
+            }
+            slideElements.forEach(function(slide, i) {
+                slide.style.backgroundImage = "url('" + slides[i] + "')";
+            });
+        });
+    </script>
+</head>
+<body>
+
+    <!-- NAVIGATION -->
+    <nav class="nav">
+        <div class="logo">KHUSHI <span>STUDIO</span></div>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#portfolio">Portfolio</a></li>
+            <li><a href="#booking">Booking</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li><a href="#booking" class="book-btn">Book Now</a></li>
+        </ul>
+    </nav>
+
+    <!-- HERO SLIDER -->
+    <section class="hero-slider" id="home">
+        <div class="slide">
+            <div class="hero-content">
+                <h1>Capture Every <span>Moment</span></h1>
+                <p>Professional Photography &amp; Color Printing in Ballia, U.P.</p>
+                <div class="hero-btns">
+                    <a href="#booking" class="btn btn-primary">Book a Session</a>
+                    <a href="#portfolio" class="btn btn-outline">View Portfolio</a>
+                </div>
+            </div>
+        </div>
+        <div class="slide">
+            <div class="hero-content">
+                <h1>Wedding <span>Photography</span></h1>
+                <p>Making your special day unforgettable with stunning memories.</p>
+                <div class="hero-btns">
+                    <a href="#booking" class="btn btn-primary">Book Now</a>
+                    <a href="#services" class="btn btn-outline">Our Services</a>
+                </div>
+            </div>
+        </div>
+        <div class="slide">
+            <div class="hero-content">
+                <h1>Color <span>Lab</span> Printing</h1>
+                <p>High-quality photo prints, albums &amp; color lab services.</p>
+                <div class="hero-btns">
+                    <a href="#booking" class="btn btn-primary">Get Started</a>
+                    <a href="#contact" class="btn btn-outline">Contact Us</a>
+                </div>
+            </div>
+        </div>
+        <div class="slider-dots">
+            <div class="dot" onclick="changeSlide(0)"></div>
+            <div class="dot" onclick="changeSlide(1)"></div>
+            <div class="dot" onclick="changeSlide(2)"></div>
+        </div>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section class="about" id="about">
+        <div class="about-img">
+            <img src="https://images.unsplash.com/photo-1554080353-a576cf803bda?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Khushi Studio Photography">
+        </div>
+        <div class="about-text">
+            <h2>About <span>Khushi Studio</span></h2>
+            <p>Welcome to Khushi Studio And Color Lab, Belthara Road, Ballia — your trusted destination for professional photography, color printing, and photo lab services in Eastern U.P. We capture life's most precious moments with passion and perfection.</p>
+            <p>Owner <strong>Satish Gupta</strong> brings years of experience in wedding, portrait, and event photography, along with state-of-the-art color lab facilities.</p>
+            <div class="about-features">
+                <div class="feature">
+                    <div class="feature-icon">📸</div>
+                    <span>Professional Equipment</span>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">🎨</div>
+                    <span>Color Lab Printing</span>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">💍</div>
+                    <span>Wedding Specialist</span>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">⚡</div>
+                    <span>Fast Delivery</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVICES SECTION -->
+    <section class="services" id="services">
+        <div class="section-header">
+            <h2>Our <span style="color:var(--primary)">Services</span></h2>
+            <div class="line"></div>
+        </div>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">💍</div>
+                <h3>Wedding Photography</h3>
+                <p>Complete wedding coverage with candid, traditional &amp; cinematic styles. Pre-wedding shoots also available.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🎂</div>
+                <h3>Birthday &amp; Events</h3>
+                <p>Birthday parties, anniversaries, naming ceremonies &amp; all special events beautifully captured.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🖼️</div>
+                <h3>Color Lab &amp; Printing</h3>
+                <p>High-quality photo prints, photo albums, canvas printing, ID photos &amp; passport size photos.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">👤</div>
+                <h3>Portrait Photography</h3>
+                <p>Professional portraits for individuals, families, corporate profiles &amp; school/college photos.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🎓</div>
+                <h3>School &amp; College Events</h3>
+                <p>Annual day, sports day, farewell &amp; convocation photography for educational institutions.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🎬</div>
+                <h3>Videography</h3>
+                <p>Cinematic wedding films, event videos &amp; highlight reels with professional editing.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- PORTFOLIO SECTION -->
+    <section class="portfolio" id="portfolio">
+        <div class="section-header">
+            <h2>Our <span style="color:var(--primary)">Portfolio</span></h2>
+            <div class="line"></div>
+        </div>
+        <div class="portfolio-grid">
+            <div class="portfolio-item">
+                <img src="https://images.unsplash.com/photo-1519741497674-611481863552?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Wedding Photography">
+                <div class="portfolio-overlay"><p>Wedding Photography</p></div>
+            </div>
+            <div class="portfolio-item">
+                <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Portrait">
+                <div class="portfolio-overlay"><p>Portrait Session</p></div>
+            </div>
+            <div class="portfolio-item">
+                <img src="https://images.unsplash.com/photo-1530103862676-de8c9debad1d?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Birthday Event">
+                <div class="portfolio-overlay"><p>Birthday Event</p></div>
+            </div>
+            <div class="portfolio-item">
+                <img src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Camera">
+                <div class="portfolio-overlay"><p>Studio Shoot</p></div>
+            </div>
+            <div class="portfolio-item">
+                <img src="https://images.unsplash.com/photo-1537633468071-6548d0a7a8af?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Couple">
+                <div class="portfolio-overlay"><p>Pre-Wedding Shoot</p></div>
+            </div>
+            <div class="portfolio-item">
+                <img src="https://images.unsplash.com/photo-1444555527773-0a1ba8f6173b?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Family Portrait">
+                <div class="portfolio-overlay"><p>Family Portrait</p></div>
+            </div>
+            <div class="portfolio-item">
+                <img src="https://images.unsplash.com/photo-1502635385003-ee1e6a1a742d?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Fashion">
+                <div class="portfolio-overlay"><p>Fashion Shoot</p></div>
+            </div>
+            <div class="portfolio-item">
+                <img src="https://images.unsplash.com/photo-1520854221256-17451cc330e7?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Reception">
+                <div class="portfolio-overlay"><p>Reception Event</p></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- BOOKING SECTION -->
+    <section class="booking" id="booking">
+        <div class="section-header">
+            <h2>Book a <span style="color:var(--primary)">Session</span></h2>
+            <div class="line"></div>
+        </div>
+        <div class="booking-box">
+            <div id="bookingForm">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="name">Your Name *</label>
+                        <input type="text" id="name" placeholder="Enter your full name" oninput="onInput(this)">
+                        <span class="input-check" id="check-name">✔</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="mobile">Mobile Number *</label>
+                        <input type="tel" id="mobile" placeholder="Enter mobile number" oninput="onInput(this)">
+                        <span class="input-check" id="check-mobile">✔</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="date">Event Date *</label>
+                        <input type="date" id="date" onchange="onInput(this)">
+                        <span class="input-check" id="check-date">✔</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="service">Select Service *</label>
+                        <div class="select-wrap" id="serviceWrap">
+                            <select id="service" onchange="onServiceSelect(this)">
+                                <option value="">-- Select Service --</option>
+                                <option value="Wedding Photography" data-icon="💍" data-desc="Shaadi ki har khaas pal capture hogi!">Wedding Photography</option>
+                                <option value="Pre-Wedding Shoot" data-icon="💑" data-desc="Pre-wedding ke romantic shots!">Pre-Wedding Shoot</option>
+                                <option value="Birthday Event" data-icon="🎂" data-desc="Birthday party ki dhoom machaenge!">Birthday Event</option>
+                                <option value="Portrait Session" data-icon="👤" data-desc="Professional portrait session!">Portrait Session</option>
+                                <option value="Color Lab / Printing" data-icon="🖼️" data-desc="High-quality photo prints ready!">Color Lab / Printing</option>
+                                <option value="School/College Event" data-icon="🎓" data-desc="School/college event ki yaadein!">School/College Event</option>
+                                <option value="Videography" data-icon="🎬" data-desc="Cinematic video banayenge!">Videography</option>
+                            </select>
+                        </div>
+                        <div class="service-badge" id="serviceBadge"></div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="message">Additional Message</label>
+                    <textarea id="message" rows="4" placeholder="Any special requirements..."></textarea>
+                </div>
+                <button class="submit-btn" onclick="sendBooking()">📩 Send Booking Request</button>
+            </div>
+            <div class="thank-you" id="thankYou">
+
+                <!-- Animated Check Icon -->
+                <div class="ty-check-wrap">✅</div>
+
+                <h2>🎉 Booking Request Sent!</h2>
+                <p class="ty-sub">Aapka message Khushi Studio tak pahunch gaya hai.</p>
+
+                <!-- Main Notice Box -->
+                <div class="ty-notice-box">
+                    <div class="ty-notice-title">📢 Important Notice</div>
+                    <p>
+                        Namaste <strong id="ty-name" style="color:var(--primary)"></strong> Ji! &nbsp;🙏<br><br>
+                        Aapki booking request humein mil gayi hai. Hum bahut jald aapke number
+                        <strong id="ty-mobile" style="color:var(--primary)"></strong> par contact karenge.<br><br>
+                        Khushi Studio &amp; Color Lab mein aapka swagat hai — hum aapki har khaas moment ko
+                        ek yaadgaar tasveer mein badalne ke liye taiyaar hain! 📸✨
+                    </p>
+                </div>
+
+                <!-- Info cards -->
+                <div class="ty-info-row">
+                    <div class="ty-info-card">⏱️ Reply time: <span>Within 24 Hours</span></div>
+                    <div class="ty-info-card">📍 Location: <span>Belthara Road, Ballia</span></div>
+                    <div class="ty-info-card">👤 Owner: <span>Satish Gupta</span></div>
+                </div>
+
+                <!-- Stay Tuned Banner -->
+                <div class="ty-stay-tuned">
+                    <span class="pulse-dot"></span>
+                    <strong style="color:var(--primary)">Thank You For Contacting Us!</strong>
+                    &nbsp;—&nbsp; Stay Tuned For Reply! 🔔
+                </div>
+
+                <!-- WhatsApp Button -->
+                <div style="margin-top:15px;">
+                    <a href="https://wa.me/918691940205" target="_blank" class="whatsapp-note">
+                        💬 WhatsApp Karo — 8691940205
+                    </a>
+                </div>
+
+                <br>
+                <button class="again-btn" onclick="bookAgain()">🔄 Book Another Session</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section class="contact" id="contact">
+        <div class="section-header">
+            <h2>Contact <span style="color:var(--primary)">Us</span></h2>
+            <div class="line"></div>
+        </div>
+        <div class="contact-grid">
+            <div class="contact-item">
+                <div class="icon">📍</div>
+                <h4>Address</h4>
+                <p>Belthara Road, Ballia (U.P.)</p>
+            </div>
+            <div class="contact-item">
+                <div class="icon">📞</div>
+                <h4>Mobile</h4>
+                <a href="tel:8691940205">8691940205</a><br>
+                <a href="tel:8652648212">8652648212</a>
+            </div>
+            <div class="contact-item">
+                <div class="icon">✉️</div>
+                <h4>Email</h4>
+                <a href="mailto:khushistudiobltr@gmail.com">khushistudiobltr@gmail.com</a>
+            </div>
+            <div class="contact-item">
+                <div class="icon">👤</div>
+                <h4>Proprietor</h4>
+                <p>Satish Gupta</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══ FULL-SCREEN THANK YOU OVERLAY ══ -->
+    <div id="tyOverlay" role="dialog" aria-modal="true" aria-label="Thank You Overlay">
+        <div class="ty-shutter" id="tyShutter"></div>
+        <div class="ty-overlay-glow"></div>
+        <div class="ty-particles" id="tyParticles"></div>
+        <div class="ty-overlay-content">
+            <div class="ty-camera-icon" id="tyCamIcon">📸</div>
+            <div class="ty-headline">
+                <span class="word">Thank&nbsp;</span><span class="word highlight">You&nbsp;</span><span class="word">For&nbsp;</span><span class="word highlight">Joining&nbsp;</span><span class="word">Us!</span>
+            </div>
+            <div class="ty-subline">Your Memories Are In Safe Hands ✨</div>
+            <div class="ty-divider"></div>
+            <div class="ty-stay-badge">
+                <span class="live-dot"></span>
+                Stay Tuned For Something Beautiful!
+            </div>
+            <button class="ty-close-btn" onclick="closeTyOverlay()">← Back to Booking</button>
+        </div>
+        <div class="ty-brand-strip">
+            <span>Khushi Studio</span> &nbsp;·&nbsp; Belthara Road, Ballia &nbsp;·&nbsp; <span>Every Moment Matters</span>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>© 2025 Khushi Studio And Color Lab, Belthara Road, Ballia | Proprietor: Satish Gupta | All Rights Reserved</p>
+    </footer>
+
+</body>
+</html>
