@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Khushi Studio And Color Lab | Best Photography in Ballia</title>
-    <meta name="google-site-verification" content="RDV3QPB7vqCdOg4WWaLx1WqKtOYUUUq0SJr2YE53yCQ" />
     <style>
         /* --- DEEPSTUDIO INSPIRED DESIGN --- */
         :root {
@@ -1069,28 +1068,82 @@
         }
 
         /* ── MOBILE ── */
-        /* --- MOBILE --- */
+        /* ── EXTRA MOBILE FIXES ── */
         @media (max-width: 768px) {
-            .nav { padding: 15px 20px; }
-            .nav ul { display: none; }
-            .hero-content h1 { font-size: 2rem; }
-            .hero-btns { flex-direction: column; }
-            .about { grid-template-columns: 1fr; }
-            .about-img { height: 300px; }
-            .form-grid { grid-template-columns: 1fr; }
-            .booking-box { padding: 30px 20px; }
             .portfolio-grid { grid-template-columns: 1fr 1fr; }
+            .portfolio-item { height: 180px; }
+            .section-header h2 { font-size: 1.8rem; }
+            .hero-content h1 { font-size: 2rem; padding: 0 10px; }
+            .hero-content p { font-size: 1rem; padding: 0 15px; }
+            .about { padding: 60px 6%; }
+            .about-text h2 { font-size: 1.8rem; }
+            .services { padding: 60px 5%; }
+            .booking { padding: 60px 5%; }
+            .booking-box { padding: 25px 15px; }
+            .form-group input, .form-group select, .form-group textarea {
+                font-size: 16px; /* prevents iOS zoom */
+            }
+            .submit-btn { font-size: 1rem; padding: 15px; }
+            .contact { padding: 60px 5%; }
+            .ty-notice-box { padding: 18px 16px; }
+            .ty-info-row { flex-direction: column; align-items: center; }
+            .ty-info-card { width: 100%; justify-content: center; }
+            footer p { font-size: 0.75rem; padding: 0 10px; }
+            /* Mobile hamburger menu */
+            .nav { padding: 12px 18px; }
+            .hamburger { display: flex !important; }
+            .nav ul.open { display: flex !important; }
+        }
+        @media (max-width: 400px) {
+            .hero-content h1 { font-size: 1.6rem; }
+            .portfolio-grid { grid-template-columns: 1fr; }
+            .portfolio-item { height: 220px; }
+        }
+        /* Hamburger button */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 5px;
+            z-index: 1100;
+        }
+        .hamburger span {
+            width: 24px;
+            height: 2px;
+            background: var(--light);
+            border-radius: 2px;
+            transition: 0.3s;
+        }
+        @media (max-width: 768px) {
+            .nav ul {
+                position: fixed;
+                top: 0; left: 0; right: 0;
+                background: rgba(10,10,10,0.98);
+                flex-direction: column;
+                align-items: center;
+                padding: 80px 20px 30px;
+                gap: 20px;
+                display: none;
+                z-index: 1050;
+            }
         }
     </style>
 
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <!-- EmailJS SDK for direct email sending without redirection -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script>
+        // Initialize EmailJS — Replace 'YOUR_PUBLIC_KEY' with your key from emailjs.com
+        emailjs.init('OKaT6mjsg8JA8ioqe');
+    </script>
 
     <script>
-        // Slider Images
+        // Slider Images - Using reliable direct sources
         const slides = [
-            'https://images.unsplash.com/photo-1516035069371-29a1b244cc32?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80',
-            'https://images.unsplash.com/photo-1519741497674-611481863552?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80',
-            'https://images.unsplash.com/photo-1520854221256-17451cc330e7?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80'
+            'https://images.pexels.com/photos/1024993/pexels-photo-1024993.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop',
+            'https://images.pexels.com/photos/265722/pexels-photo-265722.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop',
+            'https://images.pexels.com/photos/1444442/pexels-photo-1444442.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop'
         ];
 
         let currentSlide = 0;
@@ -1114,13 +1167,13 @@
 
         setInterval(autoSlide, 4000);
 
-        // Booking Form
+        // Booking Form - EmailJS Direct Send
         function sendBooking() {
-            var name = document.getElementById('name').value;
-            var mobile = document.getElementById('mobile').value;
+            var name = document.getElementById('name').value.trim();
+            var mobile = document.getElementById('mobile').value.trim();
             var date = document.getElementById('date').value;
             var service = document.getElementById('service').value;
-            var message = document.getElementById('message').value;
+            var message = document.getElementById('message').value.trim();
 
             if(name == "" || mobile == "" || date == "" || service == "") {
                 if(!name)    shakeField('name');
@@ -1131,16 +1184,39 @@
                 return false;
             }
 
-            var emailBody = "Hello Khushi Studio,%0A%0ANew Booking Request:%0A%0A" +
-                "📛 Name: " + name + "%0A" +
-                "📱 Mobile: " + mobile + "%0A" +
-                "📅 Event Date: " + date + "%0A" +
-                "📸 Service: " + service + "%0A" +
-                "💬 Message: " + message + "%0A%0AThank you!";
+            // Disable button to prevent double-submit
+            var btn = document.querySelector('.submit-btn');
+            btn.disabled = true;
+            btn.textContent = '⏳ Sending...';
 
-            window.location.href = "mailto:khushistudiobltr@gmail.com?subject=Booking - " + name + "&body=" + emailBody;
-            
-            showThankYou(name, mobile);        }
+            var templateParams = {
+                from_name:    name,
+                mobile:       mobile,
+                event_date:   date,
+                service:      service,
+                message:      message || 'No additional message.',
+                to_email:     'khushistudiobltr@gmail.com'
+            };
+
+            emailjs.send('service_trtq9oo', 'template_811lhss', templateParams)
+                .then(function() {
+                    btn.disabled = false;
+                    btn.textContent = '📩 Send Booking Request';
+                    showThankYou(name, mobile);
+                }, function(error) {
+                    btn.disabled = false;
+                    btn.textContent = '📩 Send Booking Request';
+                    // Fallback: open mailto if EmailJS fails
+                    var emailBody = "Hello Khushi Studio,%0A%0ANew Booking Request:%0A%0A" +
+                        "Name: " + name + "%0A" +
+                        "Mobile: " + mobile + "%0A" +
+                        "Event Date: " + date + "%0A" +
+                        "Service: " + service + "%0A" +
+                        "Message: " + (message||'N/A') + "%0A%0AThank you!";
+                    window.open("mailto:khushistudiobltr@gmail.com?subject=Booking - " + encodeURIComponent(name) + "&body=" + emailBody);
+                    showThankYou(name, mobile);
+                });
+        }
 
         function showThankYou(name, mobile) {
             document.getElementById('bookingForm').style.display = 'none';
@@ -1345,6 +1421,14 @@
 
         // ── END OPTION ANIMATIONS ───────────────────────────────────────────
 
+        function toggleMenu() {
+            var menu = document.getElementById('navMenu');
+            menu.classList.toggle('open');
+        }
+        function closeMenu() {
+            document.getElementById('navMenu').classList.remove('open');
+        }
+
         window.addEventListener('load', function() {
             var slideElements = document.querySelectorAll('.slide');
             if(slideElements.length > 0) {
@@ -1362,14 +1446,17 @@
     <!-- NAVIGATION -->
     <nav class="nav">
         <div class="logo">KHUSHI <span>STUDIO</span></div>
-        <ul>
-            <li><a href="#home">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#services">Services</a></li>
-            <li><a href="#portfolio">Portfolio</a></li>
-            <li><a href="#booking">Booking</a></li>
-            <li><a href="#contact">Contact</a></li>
-            <li><a href="#booking" class="book-btn">Book Now</a></li>
+        <div class="hamburger" onclick="toggleMenu()" id="hamburger">
+            <span></span><span></span><span></span>
+        </div>
+        <ul id="navMenu">
+            <li><a href="#home" onclick="closeMenu()">Home</a></li>
+            <li><a href="#about" onclick="closeMenu()">About</a></li>
+            <li><a href="#services" onclick="closeMenu()">Services</a></li>
+            <li><a href="#portfolio" onclick="closeMenu()">Portfolio</a></li>
+            <li><a href="#booking" onclick="closeMenu()">Booking</a></li>
+            <li><a href="#contact" onclick="closeMenu()">Contact</a></li>
+            <li><a href="#booking" class="book-btn" onclick="closeMenu()">Book Now</a></li>
         </ul>
     </nav>
 
@@ -1415,12 +1502,12 @@
     <!-- ABOUT SECTION -->
     <section class="about" id="about">
         <div class="about-img">
-            <img src="https://images.unsplash.com/photo-1554080353-a576cf803bda?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Khushi Studio Photography">
+            <img src="https://images.pexels.com/photos/3379934/pexels-photo-3379934.jpeg?auto=compress&cs=tinysrgb&w=800&h=900&fit=crop" alt="Khushi Studio Photography">
         </div>
         <div class="about-text">
             <h2>About <span>Khushi Studio</span></h2>
             <p>Welcome to Khushi Studio And Color Lab, Belthara Road, Ballia — your trusted destination for professional photography, color printing, and photo lab services in Eastern U.P. We capture life's most precious moments with passion and perfection.</p>
-            <p>Owner <strong>Satish Gupta</strong> brings years of experience in wedding, portrait, and event photography, along with state-of-the-art color lab facilities.</p>
+            <p>Owner <strong>Satish Gupta</strong> &amp; Proprietor <strong>Prince Gupta</strong> bring years of experience in wedding, portrait, and event photography, along with state-of-the-art color lab facilities.</p>
             <div class="about-features">
                 <div class="feature">
                     <div class="feature-icon">📸</div>
@@ -1490,35 +1577,35 @@
         </div>
         <div class="portfolio-grid">
             <div class="portfolio-item">
-                <img src="https://images.unsplash.com/photo-1519741497674-611481863552?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Wedding Photography">
+                <img src="https://images.pexels.com/photos/1024993/pexels-photo-1024993.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop" alt="Wedding Photography">
                 <div class="portfolio-overlay"><p>Wedding Photography</p></div>
             </div>
             <div class="portfolio-item">
-                <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Portrait">
+                <img src="https://images.pexels.com/photos/1755683/pexels-photo-1755683.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop" alt="Portrait">
                 <div class="portfolio-overlay"><p>Portrait Session</p></div>
             </div>
             <div class="portfolio-item">
-                <img src="https://images.unsplash.com/photo-1530103862676-de8c9debad1d?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Birthday Event">
+                <img src="https://images.pexels.com/photos/1543793/pexels-photo-1543793.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop" alt="Birthday Event">
                 <div class="portfolio-overlay"><p>Birthday Event</p></div>
             </div>
             <div class="portfolio-item">
-                <img src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Camera">
+                <img src="https://images.pexels.com/photos/3379934/pexels-photo-3379934.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop" alt="Camera">
                 <div class="portfolio-overlay"><p>Studio Shoot</p></div>
             </div>
             <div class="portfolio-item">
-                <img src="https://images.unsplash.com/photo-1537633468071-6548d0a7a8af?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Couple">
+                <img src="https://images.pexels.com/photos/265722/pexels-photo-265722.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop" alt="Couple">
                 <div class="portfolio-overlay"><p>Pre-Wedding Shoot</p></div>
             </div>
             <div class="portfolio-item">
-                <img src="https://images.unsplash.com/photo-1444555527773-0a1ba8f6173b?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Family Portrait">
+                <img src="https://images.pexels.com/photos/1587927/pexels-photo-1587927.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop" alt="Family Portrait">
                 <div class="portfolio-overlay"><p>Family Portrait</p></div>
             </div>
             <div class="portfolio-item">
-                <img src="https://images.unsplash.com/photo-1502635385003-ee1e6a1a742d?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Fashion">
+                <img src="https://images.pexels.com/photos/1444442/pexels-photo-1444442.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop" alt="Fashion">
                 <div class="portfolio-overlay"><p>Fashion Shoot</p></div>
             </div>
             <div class="portfolio-item">
-                <img src="https://images.unsplash.com/photo-1520854221256-17451cc330e7?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Reception">
+                <img src="https://images.pexels.com/photos/3754275/pexels-photo-3754275.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop" alt="Reception">
                 <div class="portfolio-overlay"><p>Reception Event</p></div>
             </div>
         </div>
@@ -1595,7 +1682,7 @@
                 <div class="ty-info-row">
                     <div class="ty-info-card">⏱️ Reply time: <span>Within 24 Hours</span></div>
                     <div class="ty-info-card">📍 Location: <span>Belthara Road, Ballia</span></div>
-                    <div class="ty-info-card">👤 Owner: <span>Satish Gupta</span></div>
+                    <div class="ty-info-card">👤 Proprietors: <span>Satish &amp; Prince Gupta</span></div>
                 </div>
 
                 <!-- Stay Tuned Banner -->
@@ -1603,13 +1690,6 @@
                     <span class="pulse-dot"></span>
                     <strong style="color:var(--primary)">Thank You For Contacting Us!</strong>
                     &nbsp;—&nbsp; Stay Tuned For Reply! 🔔
-                </div>
-
-                <!-- WhatsApp Button -->
-                <div style="margin-top:15px;">
-                    <a href="https://wa.me/918691940205" target="_blank" class="whatsapp-note">
-                        💬 WhatsApp Karo — 8691940205
-                    </a>
                 </div>
 
                 <br>
@@ -1675,7 +1755,7 @@
 
     <!-- FOOTER -->
     <footer>
-        <p>© 2025 Khushi Studio And Color Lab, Belthara Road, Ballia | Proprietor: Satish Gupta | All Rights Reserved</p>
+        <p>© 2025 Khushi Studio And Color Lab, Belthara Road, Ballia | Proprietors: Satish Gupta &amp; Prince Gupta | All Rights Reserved</p>
     </footer>
 
 </body>
