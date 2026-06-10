@@ -50,10 +50,10 @@
         }
 
         .logo {
-            font-size: 1.6rem;
+            font-size: 1.1rem;
             font-weight: 700;
             color: var(--light);
-            letter-spacing: 3px;
+            letter-spacing: 2px;
         }
 
         .logo span {
@@ -102,13 +102,11 @@
 
         .slide {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
             opacity: 0;
-            transition: opacity 1s ease;
-            background-size: cover;
+            transition: opacity 1.5s ease;
+            background-size: 110%;
             background-position: center;
             display: flex;
             align-items: center;
@@ -117,21 +115,44 @@
 
         .slide.active {
             opacity: 1;
+            animation: kenBurns 8s ease-in-out forwards;
+        }
+
+        @keyframes kenBurns {
+            0%   { background-size: 110%; background-position: 35% 45%; }
+            100% { background-size: 128%; background-position: 62% 55%; }
         }
 
         .slide::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(0deg, var(--dark) 0%, transparent 50%, rgba(0,0,0,0.5) 100%);
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: linear-gradient(
+                to bottom,
+                rgba(0,0,0,0.5) 0%,
+                rgba(0,0,0,0.05) 45%,
+                rgba(10,10,10,0.9) 100%
+            );
         }
+
+        /* Cinematic letterbox bars */
+        .hero-slider::before,
+        .hero-slider::after {
+            content: '';
+            position: absolute;
+            left: 0; width: 100%;
+            height: 55px;
+            background: rgba(0,0,0,0.8);
+            z-index: 5;
+            pointer-events: none;
+        }
+        .hero-slider::before { top: 0; }
+        .hero-slider::after  { bottom: 0; }
 
         .hero-content {
             position: relative;
-            z-index: 2;
+            z-index: 6;
             text-align: center;
             max-width: 800px;
         }
@@ -351,41 +372,102 @@
         .portfolio-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 10px;
+            gap: 12px;
         }
 
         .portfolio-item {
             position: relative;
-            height: 300px;
+            aspect-ratio: 3 / 4;
             overflow: hidden;
             border-radius: 10px;
             cursor: pointer;
+        }
+
+        /* Cinematic wide item */
+        .portfolio-item.wide {
+            grid-column: span 2;
+            aspect-ratio: 16 / 9;
         }
 
         .portfolio-item img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: 0.5s;
+            object-position: center center;
+            transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                        filter 0.7s ease;
+            filter: brightness(0.85) saturate(1.1);
         }
 
         .portfolio-item:hover img {
             transform: scale(1.1);
+            filter: brightness(1) saturate(1.3) contrast(1.05);
         }
+
+        /* Cinematic golden film-grain overlay */
+        .portfolio-item::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                135deg,
+                rgba(255, 152, 0, 0.08) 0%,
+                transparent 50%,
+                rgba(0,0,0,0.2) 100%
+            );
+            z-index: 1;
+            pointer-events: none;
+            transition: opacity 0.4s;
+        }
+
+        /* Letterbox effect on wide items */
+        .portfolio-item.wide::after {
+            content: '';
+            position: absolute;
+            left: 0; right: 0;
+            height: 22px;
+            background: rgba(0,0,0,0.85);
+            z-index: 2;
+            pointer-events: none;
+        }
+        .portfolio-item.wide::after { bottom: 0; }
 
         .portfolio-overlay {
             position: absolute;
-            bottom: 0;
-            left: 0;
+            bottom: 0; left: 0;
             width: 100%;
-            padding: 20px;
-            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            padding: 25px 20px 20px;
+            background: linear-gradient(transparent, rgba(0,0,0,0.9));
             opacity: 0;
-            transition: 0.3s;
+            transition: opacity 0.4s ease;
+            z-index: 3;
+        }
+
+        .portfolio-overlay p {
+            color: #fff;
+            font-weight: 600;
+            font-size: 0.95rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .portfolio-overlay p::before {
+            content: '— ';
+            color: var(--primary);
         }
 
         .portfolio-item:hover .portfolio-overlay {
             opacity: 1;
+        }
+
+        /* Vignette frame on hover */
+        .portfolio-item:hover::before {
+            background: linear-gradient(
+                135deg,
+                rgba(255, 152, 0, 0.15) 0%,
+                transparent 50%,
+                rgba(0,0,0,0.35) 100%
+            );
         }
 
         /* --- BOOKING SECTION --- */
@@ -1128,7 +1210,7 @@
                 z-index: 1050;
             }
         }
-    </style>
+        </style>
 
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <!-- EmailJS SDK for direct email sending without redirection -->
@@ -1139,11 +1221,11 @@
     </script>
 
     <script>
-        // Slider Images - Using reliable direct sources
+        // Slider Images - Traditional & Cinematic Photography
         const slides = [
-            'https://images.pexels.com/photos/1024993/pexels-photo-1024993.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop',
-            'https://images.pexels.com/photos/265722/pexels-photo-265722.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop',
-            'https://images.pexels.com/photos/1444442/pexels-photo-1444442.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop'
+            'https://images.pexels.com/photos/32081713/pexels-photo-32081713.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop',
+            'https://images.pexels.com/photos/31002333/pexels-photo-31002333.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop',
+            'https://images.pexels.com/photos/19734103/pexels-photo-19734103.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop'
         ];
 
         let currentSlide = 0;
@@ -1155,7 +1237,7 @@
             slideElements[currentSlide].classList.remove('active');
             dots[currentSlide].classList.remove('active');
             
-            currentSlide = (n + slideElements.length) % slideElements.length;
+            currentSlide = ((typeof n === 'number' ? n : currentSlide + 1) + slideElements.length) % slideElements.length;
             
             slideElements[currentSlide].classList.add('active');
             dots[currentSlide].classList.add('active');
@@ -1445,7 +1527,7 @@
 
     <!-- NAVIGATION -->
     <nav class="nav">
-        <div class="logo">KHUSHI <span>STUDIO</span></div>
+        <div class="logo">KHUSHI <span>STUDIO</span> AND COLOR LAB</div>
         <div class="hamburger" onclick="toggleMenu()" id="hamburger">
             <span></span><span></span><span></span>
         </div>
@@ -1502,7 +1584,7 @@
     <!-- ABOUT SECTION -->
     <section class="about" id="about">
         <div class="about-img">
-            <img src="https://images.pexels.com/photos/3379934/pexels-photo-3379934.jpeg?auto=compress&cs=tinysrgb&w=800&h=900&fit=crop" alt="Khushi Studio Photography">
+            <img src="https://images.pexels.com/photos/17000472/pexels-photo-17000472.jpeg?auto=compress&cs=tinysrgb&w=800&h=900&fit=crop" alt="Khushi Studio Photography">
         </div>
         <div class="about-text">
             <h2>About <span>Khushi Studio</span></h2>
@@ -1576,37 +1658,45 @@
             <div class="line"></div>
         </div>
         <div class="portfolio-grid">
-            <div class="portfolio-item">
-                <img src="https://images.pexels.com/photos/1024993/pexels-photo-1024993.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop" alt="Wedding Photography">
+            <div class="portfolio-item wide">
+                <img src="https://images.pexels.com/photos/29396108/pexels-photo-29396108.jpeg?auto=compress&cs=tinysrgb&w=1200&h=675&fit=crop&crop=center" alt="Wedding Photography">
                 <div class="portfolio-overlay"><p>Wedding Photography</p></div>
             </div>
             <div class="portfolio-item">
-                <img src="https://images.pexels.com/photos/1755683/pexels-photo-1755683.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop" alt="Portrait">
+                <img src="https://images.pexels.com/photos/8242700/pexels-photo-8242700.jpeg?auto=compress&cs=tinysrgb&w=600&h=800&fit=crop&crop=center" alt="Portrait">
                 <div class="portfolio-overlay"><p>Portrait Session</p></div>
             </div>
             <div class="portfolio-item">
-                <img src="https://images.pexels.com/photos/1543793/pexels-photo-1543793.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop" alt="Birthday Event">
-                <div class="portfolio-overlay"><p>Birthday Event</p></div>
+                <img src="https://images.pexels.com/photos/32060316/pexels-photo-32060316.jpeg?auto=compress&cs=tinysrgb&w=600&h=800&fit=crop&crop=center" alt="Cinematic Wedding">
+                <div class="portfolio-overlay"><p>Cinematic Wedding</p></div>
             </div>
             <div class="portfolio-item">
-                <img src="https://images.pexels.com/photos/3379934/pexels-photo-3379934.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop" alt="Camera">
-                <div class="portfolio-overlay"><p>Studio Shoot</p></div>
+                <img src="https://images.pexels.com/photos/19609236/pexels-photo-19609236.jpeg?auto=compress&cs=tinysrgb&w=600&h=800&fit=crop&crop=center" alt="Groom Portrait">
+                <div class="portfolio-overlay"><p>Groom Portrait</p></div>
             </div>
             <div class="portfolio-item">
-                <img src="https://images.pexels.com/photos/265722/pexels-photo-265722.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop" alt="Couple">
+                <img src="https://images.pexels.com/photos/23623618/pexels-photo-23623618.jpeg?auto=compress&cs=tinysrgb&w=600&h=800&fit=crop&crop=center" alt="Mehndi Ceremony">
+                <div class="portfolio-overlay"><p>Mehndi Ceremony</p></div>
+            </div>
+            <div class="portfolio-item wide">
+                <img src="https://images.pexels.com/photos/4128977/pexels-photo-4128977.jpeg?auto=compress&cs=tinysrgb&w=900&h=506&fit=crop&crop=center" alt="Traditional Ceremony">
+                <div class="portfolio-overlay"><p>Traditional Ceremony</p></div>
+            </div>
+            <div class="portfolio-item">
+                <img src="https://images.pexels.com/photos/32989947/pexels-photo-32989947.jpeg?auto=compress&cs=tinysrgb&w=600&h=800&fit=crop&crop=center" alt="Bridal Night">
+                <div class="portfolio-overlay"><p>Bridal Night Shoot</p></div>
+            </div>
+            <div class="portfolio-item">
+                <img src="https://images.pexels.com/photos/6304019/pexels-photo-6304019.jpeg?auto=compress&cs=tinysrgb&w=600&h=800&fit=crop&crop=center" alt="Reception">
+                <div class="portfolio-overlay"><p>Reception Event</p></div>
+            </div>
+            <div class="portfolio-item">
+                <img src="https://images.pexels.com/photos/22591466/pexels-photo-22591466.jpeg?auto=compress&cs=tinysrgb&w=600&h=800&fit=crop&crop=center" alt="Pre-Wedding">
                 <div class="portfolio-overlay"><p>Pre-Wedding Shoot</p></div>
             </div>
             <div class="portfolio-item">
-                <img src="https://images.pexels.com/photos/1587927/pexels-photo-1587927.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop" alt="Family Portrait">
-                <div class="portfolio-overlay"><p>Family Portrait</p></div>
-            </div>
-            <div class="portfolio-item">
-                <img src="https://images.pexels.com/photos/1444442/pexels-photo-1444442.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop" alt="Fashion">
-                <div class="portfolio-overlay"><p>Fashion Shoot</p></div>
-            </div>
-            <div class="portfolio-item">
-                <img src="https://images.pexels.com/photos/3754275/pexels-photo-3754275.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop" alt="Reception">
-                <div class="portfolio-overlay"><p>Reception Event</p></div>
+                <img src="https://images.pexels.com/photos/14944153/pexels-photo-14944153.jpeg?auto=compress&cs=tinysrgb&w=600&h=800&fit=crop&crop=center" alt="Floral Ceremony">
+                <div class="portfolio-overlay"><p>Floral Ceremony</p></div>
             </div>
         </div>
     </section>
@@ -1749,13 +1839,13 @@
             <button class="ty-close-btn" onclick="closeTyOverlay()">← Back to Booking</button>
         </div>
         <div class="ty-brand-strip">
-            <span>Khushi Studio</span> &nbsp;·&nbsp; Belthara Road, Ballia &nbsp;·&nbsp; <span>Every Moment Matters</span>
+            <span>KHUSHI STUDIO AND COLOR LAB</span> &nbsp;·&nbsp; Belthara Road, Ballia &nbsp;·&nbsp; <span>Every Moment Matters</span>
         </div>
     </div>
 
     <!-- FOOTER -->
     <footer>
-        <p>© 2025 Khushi Studio And Color Lab, Belthara Road, Ballia | Proprietors: Satish Gupta &amp; Prince Gupta | All Rights Reserved</p>
+        <p>© 2025 KHUSHI STUDIO AND COLOR LAB, Belthara Road, Ballia | Proprietors: Satish Gupta &amp; Prince Gupta | All Rights Reserved</p>
     </footer>
 
 </body>
